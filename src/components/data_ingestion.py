@@ -7,8 +7,6 @@ from dataclasses import dataclass
 
 @dataclass
 class DataIngestionConfig:
-    movies_data_path: str = os.path.join('artifacts','movies.csv')
-    credits_data_path: str = os.path.join('artifacts','credit.csv')
     merged_data_path: str = os.path.join('artifacts','movies_data.csv')
 
 class DataIngestion:
