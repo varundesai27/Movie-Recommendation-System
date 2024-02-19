@@ -3,4 +3,5 @@ numpy
 scikit-learn
 nltk
 pickle4
+streamlit
 # -e .

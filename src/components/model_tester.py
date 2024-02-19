@@ -17,6 +17,7 @@ if __name__ == "__main__":
     # Transform the merged data
     final_data = data_transformation.initiate_data_transformation(merged_data)
     #print(final_data)
+    pickle.dump(final_data.to_dict(),open('artifacts/movie_dict.pkl','wb'))
     model_trainer = ModelTrainer()
     
     # Train the model
@@ -26,12 +27,3 @@ if __name__ == "__main__":
     with open('artifacts/final_model.pkl', 'wb') as f:
         pickle.dump(similarity_matrix, f)
     logging.info("Trained model saved Successfully")
-
-    # Find the index of the movie "Batman" in the preprocessed data
-    # batman_index = final_data[final_data['title'] == 'Batman'].index[0]
-    # batman_similarity_scores = similarity_matrix[batman_index]
-    # similar_movie_indices = batman_similarity_scores.argsort()[::-1][1:6]
-    # similar_movies = final_data.iloc[similar_movie_indices]['title'].values
-    # print("Movies similar to 'Batman':")
-    # for movie in similar_movies:
-    #     print(movie)
