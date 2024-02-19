@@ -6,6 +6,8 @@ import pandas as pd
 from dataclasses import dataclass
 from src.components.data_transformation import DataTransformation
 from src.components.data_transformation import DataTransformationConfig
+from src.components.model_trainer import ModelTrainer
+from pickle4 import pickle
 
 @dataclass
 class DataIngestionConfig:
@@ -37,11 +39,3 @@ class DataIngestion:
 
         except Exception as e:
             raise CustomException(sys,e)
-
-if __name__ == "__main__":
-    obj = DataIngestion()
-    merged_data = obj.initiate_data_ingestion()
-
-    data_transformation = DataTransformation()
-    data_transformation.initiate_data_transformation(merged_data)
-

@@ -13,7 +13,7 @@ from src.exception import CustomException
 
 @dataclass
 class DataTransformationConfig:
-    preprocessor_obj_file_path = os.path.join('artifacts', 'preprocessor.pkl')
+    preprocessor_obj_file_path: str = os.path.join('artifacts', 'preprocessor.pkl')
 
 class DataTransformation:
     def __init__(self):
@@ -87,12 +87,12 @@ class DataTransformation:
             movies_df['keywords'] = movies_df['keywords'].apply(lambda x: [i.replace(" ", "") for i in x])
             movies_df['cast'] = movies_df['cast'].apply(lambda x: [i.replace(" ", "") for i in x])
             movies_df['crew'] = movies_df['crew'].apply(lambda x: [i.replace(" ", "") for i in x])
-            movies_df['tags'] = movies_df['overview'] + movies_df['genres'] + movies_df['keywords'] + \
-                               movies_df['cast'] + movies_df['crew']
+            movies_df['tags'] = movies_df['overview'] + movies_df['genres'] + movies_df['keywords'] +  movies_df['cast'] + movies_df['crew']
             
-            logging.info("Basic Preprocessing is perfomed successfull on the data")
+            logging.info("Basic Preprocessing is performed successfully on the data")
 
             final_df = movies_df[['id', 'title', 'tags']]
+
             final_df['tags'] = final_df['tags'].apply(lambda x: [item.lower() for item in x])
             final_df['tags'] = final_df['tags'].apply(lambda x: self.preprocess(x))
 
@@ -108,7 +108,8 @@ class DataTransformation:
             return final_df
 
         except Exception as e:
-            raise CustomException(sys,e)
+            raise CustomException(sys, e)
+
 
     def load_preprocessed_data(self):
         try:
